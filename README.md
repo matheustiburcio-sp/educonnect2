@@ -2,6 +2,10 @@
 
 Aplicação web para conectar pessoas interessadas em **ensinar, aprender e trocar habilidades** em uma comunidade digital colaborativa. O projeto combina descoberta de perfis, compatibilidade entre usuários, gamificação e oferta de serviços em uma experiência moderna construída com **React**, **TypeScript** e **Supabase**.
 
+## Acesso ao projeto
+
+- **Site em produção:** https://educonnect2.matheus-tiburzio.workers.dev/
+
 ## Visão geral
 
 O **EduConnect 2** foi desenvolvido com a proposta de democratizar o acesso ao conhecimento, permitindo que usuários compartilhem competências, encontrem oportunidades de aprendizado e construam reputação dentro da plataforma.
