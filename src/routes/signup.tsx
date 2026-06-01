@@ -7,7 +7,7 @@ import { authService } from "@/services/auth-service";
 export const Route = createFileRoute("/signup")({
   head: () => ({
     meta: [
-      { title: "Criar conta â€” EduConnect" },
+      { title: "Criar conta — EduConnect" },
       { name: "description", content: "Crie sua conta gratuita na EduConnect e comece a aprender hoje." },
     ],
   }),
@@ -43,7 +43,7 @@ function SignupPage() {
   const handleGoogle = async () => {
     setError(null);
     const result = await authService.signInWithGoogle(window.location.origin);
-    if (result.error) setError("NÃ£o foi possÃ­vel entrar com o Google.");
+    if (result.error) setError("Não foi possível entrar com o Google.");
     if (result.redirected) return;
     if (!result.error) navigate({ to: "/" });
   };
@@ -60,7 +60,7 @@ function SignupPage() {
         </Link>
         <div>
           <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-sm font-medium mb-6">
-            <Sparkles className="h-3.5 w-3.5" /> Ã‰ grÃ¡tis para sempre
+            <Sparkles className="h-3.5 w-3.5" /> É grátis para sempre
           </div>
           <h2 className="text-4xl font-bold leading-tight">
             Comece a aprender e ensinar hoje mesmo.
@@ -72,7 +72,7 @@ function SignupPage() {
             {[
               { icon: Repeat2, text: "Troque habilidades sem custo" },
               { icon: Zap, text: "Acumule XP e badges exclusivos" },
-              { icon: Star, text: "Monetize o que vocÃª jÃ¡ sabe" },
+              { icon: Star, text: "Monetize o que você já sabe" },
             ].map(({ icon: Icon, text }) => (
               <div key={text} className="flex items-center gap-3">
                 <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/15">
@@ -83,7 +83,7 @@ function SignupPage() {
             ))}
           </div>
         </div>
-        <p className="text-xs opacity-60">Â© 2024 EduConnect</p>
+        <p className="text-xs opacity-60">© 2024 EduConnect</p>
       </div>
       {/* Right form panel */}
       <div className="flex flex-1 flex-col items-center justify-center px-6 py-10">
@@ -95,7 +95,7 @@ function SignupPage() {
             <span className="font-display font-bold text-base tracking-tight">educonnect</span>
           </Link>
           <h1 className="text-2xl font-bold">Crie sua conta</h1>
-          <p className="mt-1 text-sm text-muted-foreground">GrÃ¡tis para sempre. Sem cartÃ£o de crÃ©dito.</p>
+          <p className="mt-1 text-sm text-muted-foreground">Grátis para sempre. Sem cartão de crédito.</p>
           <div className="mt-8 space-y-4">
             <button onClick={handleGoogle} type="button" className="flex w-full items-center justify-center gap-3 rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold transition-colors hover:border-primary">
               <GoogleIcon /> Cadastrar com Google
@@ -111,7 +111,7 @@ function SignupPage() {
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="voce@email.com" className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition-colors focus:border-primary" />
               </FieldRow>
               <FieldRow label="Senha">
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} placeholder="MÃ­nimo de 6 caracteres" className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition-colors focus:border-primary" />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} placeholder="Mínimo de 6 caracteres" className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition-colors focus:border-primary" />
               </FieldRow>
               {error && <p className="text-xs text-destructive">{error}</p>}
               {info && <p className="text-xs text-success">{info}</p>}
@@ -120,7 +120,7 @@ function SignupPage() {
               </button>
             </form>
             <p className="text-center text-xs text-muted-foreground">
-              JÃ¡ tem conta? <Link to="/login" className="font-semibold text-primary hover:underline">Entrar</Link>
+              Já tem conta? <Link to="/login" className="font-semibold text-primary hover:underline">Entrar</Link>
             </p>
           </div>
         </div>
