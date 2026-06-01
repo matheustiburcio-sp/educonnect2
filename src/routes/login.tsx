@@ -1,6 +1,6 @@
 import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { BookOpen, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2, Sparkles, Repeat2, Zap, Star } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { authService } from "@/services/auth-service";
 
@@ -49,42 +49,73 @@ function LoginPage() {
     if (!result.error) navigate({ to: "/" });
   };
 
-  return <AuthShell title="Bem-vindo de volta" subtitle="Entre para continuar sua jornada de aprendizado.">
-    <button onClick={handleGoogle} type="button" className="flex w-full items-center justify-center gap-3 rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold transition-colors hover:border-primary">
-      <GoogleIcon /> Continuar com Google
-    </button>
-    <Divider />
-    <form onSubmit={handleSubmit} className="space-y-4">
-      <Field label="E-mail" type="email" value={email} onChange={setEmail} placeholder="voce@email.com" required />
-      <Field label="Senha" type="password" value={password} onChange={setPassword} placeholder="••••••••" required />
-      {error && <p className="text-xs text-destructive">{error}</p>}
-      <button disabled={loading} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02] disabled:opacity-60">
-        {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Entrar <ArrowRight className="h-4 w-4" /></>}
-      </button>
-    </form>
-    <p className="mt-6 text-center text-xs text-muted-foreground">
-      Não tem conta? <Link to="/signup" className="font-semibold text-primary hover:underline">Cadastre-se</Link>
-    </p>
-  </AuthShell>;
-}
-
-function AuthShell({ children, title, subtitle }: { children: React.ReactNode; title: string; subtitle: string }) {
   return (
-    <div className="bg-hero-gradient min-h-screen bg-background text-foreground">
-      <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-6 py-10">
-        <Link to="/" className="mb-8 flex items-center gap-2">
-          <div className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-to-br from-primary to-primary-glow shadow-[var(--shadow-glow)]">
-            <BookOpen className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
+    <div className="flex min-h-screen bg-background text-foreground">
+      {/* Left brand panel */}
+      <div className="hidden lg:flex lg:w-[45%] flex-col justify-between bg-cta-gradient p-12 text-white">
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="grid h-9 w-9 rounded-xl bg-white/20 place-items-center">
+            <span className="font-display font-bold text-sm">ec</span>
           </div>
-          <div className="leading-tight">
-            <div className="font-display text-base font-bold tracking-tight">EDU</div>
-            <div className="-mt-1 font-display text-base font-bold tracking-tight text-primary">CONNECT</div>
-          </div>
+          <span className="font-display font-bold text-lg tracking-tight">educonnect</span>
         </Link>
-        <div className="w-full rounded-3xl border border-border bg-surface/80 p-8 backdrop-blur-xl shadow-[var(--shadow-card)]">
-          <h1 className="text-2xl font-bold">{title}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
-          <div className="mt-6 space-y-4">{children}</div>
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-sm font-medium mb-6">
+            <Sparkles className="h-3.5 w-3.5" /> Aprenda ensinando
+          </div>
+          <h2 className="text-4xl font-bold leading-tight">
+            Transforme seu conhecimento em oportunidade.
+          </h2>
+          <p className="mt-4 text-base opacity-80 leading-relaxed">
+            Conecte-se com milhares de pessoas que ensinam, aprendem e crescem juntas.
+          </p>
+          <div className="mt-10 space-y-4">
+            {[
+              { icon: Repeat2, text: "Troque habilidades com a comunidade" },
+              { icon: Zap, text: "Ganhe XP e suba de nível" },
+              { icon: Star, text: "Construa sua reputação como educador" },
+            ].map(({ icon: Icon, text }) => (
+              <div key={text} className="flex items-center gap-3">
+                <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/15">
+                  <Icon className="h-4 w-4" />
+                </div>
+                <span className="text-sm">{text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p className="text-xs opacity-60">© 2024 EduConnect</p>
+      </div>
+      {/* Right form panel */}
+      <div className="flex flex-1 flex-col items-center justify-center px-6 py-10">
+        <div className="w-full max-w-sm">
+          <Link to="/" className="mb-8 flex items-center gap-2 lg:hidden">
+            <div className="grid h-9 w-9 rounded-xl bg-cta-gradient place-items-center">
+              <span className="font-display font-bold text-sm text-white">ec</span>
+            </div>
+            <span className="font-display font-bold text-base tracking-tight">educonnect</span>
+          </Link>
+          <h1 className="text-2xl font-bold">Bem-vindo de volta</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Entre para continuar sua jornada.</p>
+          <div className="mt-8 space-y-4">
+            <button onClick={handleGoogle} type="button" className="flex w-full items-center justify-center gap-3 rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold transition-colors hover:border-primary">
+              <GoogleIcon /> Continuar com Google
+            </button>
+            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+              <span className="h-px flex-1 bg-border" /> ou <span className="h-px flex-1 bg-border" />
+            </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <Field label="E-mail" type="email" value={email} onChange={setEmail} placeholder="voce@email.com" required />
+              <Field label="Senha" type="password" value={password} onChange={setPassword} placeholder="••••••••" required />
+              {error && <p className="text-xs text-destructive">{error}</p>}
+              <button disabled={loading} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-(--shadow-glow) transition-transform hover:scale-[1.02] disabled:opacity-60">
+                {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Entrar <ArrowRight className="h-4 w-4" /></>}
+              </button>
+            </form>
+            <p className="text-center text-xs text-muted-foreground">
+              Não tem conta? <Link to="/signup" className="font-semibold text-primary hover:underline">Cadastre-se grátis</Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -97,14 +128,6 @@ function Field({ label, type, value, onChange, placeholder, required }: { label:
       <span className="mb-1.5 block text-xs font-semibold text-muted-foreground">{label}</span>
       <input type={type} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} required={required} className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition-colors focus:border-primary" />
     </label>
-  );
-}
-
-function Divider() {
-  return (
-    <div className="flex items-center gap-3 text-xs text-muted-foreground">
-      <span className="h-px flex-1 bg-border" /> ou <span className="h-px flex-1 bg-border" />
-    </div>
   );
 }
 

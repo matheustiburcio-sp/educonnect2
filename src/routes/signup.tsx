@@ -1,13 +1,13 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+﻿import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { BookOpen, ArrowRight, Loader2 } from "lucide-react";
+import { ArrowRight, Loader2, Sparkles, Repeat2, Zap, Star } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { authService } from "@/services/auth-service";
 
 export const Route = createFileRoute("/signup")({
   head: () => ({
     meta: [
-      { title: "Criar conta — EduConnect" },
+      { title: "Criar conta â€” EduConnect" },
       { name: "description", content: "Crie sua conta gratuita na EduConnect e comece a aprender hoje." },
     ],
   }),
@@ -43,27 +43,60 @@ function SignupPage() {
   const handleGoogle = async () => {
     setError(null);
     const result = await authService.signInWithGoogle(window.location.origin);
-    if (result.error) setError("Não foi possível entrar com o Google.");
+    if (result.error) setError("NÃ£o foi possÃ­vel entrar com o Google.");
     if (result.redirected) return;
     if (!result.error) navigate({ to: "/" });
   };
 
   return (
-    <div className="bg-hero-gradient min-h-screen bg-background text-foreground">
-      <div className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center px-6 py-10">
-        <Link to="/" className="mb-8 flex items-center gap-2">
-          <div className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-to-br from-primary to-primary-glow shadow-[var(--shadow-glow)]">
-            <BookOpen className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
+    <div className="flex min-h-screen bg-background text-foreground">
+      {/* Left brand panel */}
+      <div className="hidden lg:flex lg:w-[45%] flex-col justify-between bg-cta-gradient p-12 text-white">
+        <Link to="/" className="flex items-center gap-2.5">
+          <div className="grid h-9 w-9 rounded-xl bg-white/20 place-items-center">
+            <span className="font-display font-bold text-sm">ec</span>
           </div>
-          <div className="leading-tight">
-            <div className="font-display text-base font-bold tracking-tight">EDU</div>
-            <div className="-mt-1 font-display text-base font-bold tracking-tight text-primary">CONNECT</div>
-          </div>
+          <span className="font-display font-bold text-lg tracking-tight">educonnect</span>
         </Link>
-        <div className="w-full rounded-3xl border border-border bg-surface/80 p-8 backdrop-blur-xl shadow-[var(--shadow-card)]">
+        <div>
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1.5 text-sm font-medium mb-6">
+            <Sparkles className="h-3.5 w-3.5" /> Ã‰ grÃ¡tis para sempre
+          </div>
+          <h2 className="text-4xl font-bold leading-tight">
+            Comece a aprender e ensinar hoje mesmo.
+          </h2>
+          <p className="mt-4 text-base opacity-80 leading-relaxed">
+            Crie seu perfil, liste suas habilidades e encontre sua comunidade.
+          </p>
+          <div className="mt-10 space-y-4">
+            {[
+              { icon: Repeat2, text: "Troque habilidades sem custo" },
+              { icon: Zap, text: "Acumule XP e badges exclusivos" },
+              { icon: Star, text: "Monetize o que vocÃª jÃ¡ sabe" },
+            ].map(({ icon: Icon, text }) => (
+              <div key={text} className="flex items-center gap-3">
+                <div className="grid h-9 w-9 place-items-center rounded-xl bg-white/15">
+                  <Icon className="h-4 w-4" />
+                </div>
+                <span className="text-sm">{text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p className="text-xs opacity-60">Â© 2024 EduConnect</p>
+      </div>
+      {/* Right form panel */}
+      <div className="flex flex-1 flex-col items-center justify-center px-6 py-10">
+        <div className="w-full max-w-sm">
+          <Link to="/" className="mb-8 flex items-center gap-2 lg:hidden">
+            <div className="grid h-9 w-9 rounded-xl bg-cta-gradient place-items-center">
+              <span className="font-display font-bold text-sm text-white">ec</span>
+            </div>
+            <span className="font-display font-bold text-base tracking-tight">educonnect</span>
+          </Link>
           <h1 className="text-2xl font-bold">Crie sua conta</h1>
-          <p className="mt-1 text-sm text-muted-foreground">Comece a aprender de forma gratuita.</p>
-          <div className="mt-6 space-y-4">
+          <p className="mt-1 text-sm text-muted-foreground">GrÃ¡tis para sempre. Sem cartÃ£o de crÃ©dito.</p>
+          <div className="mt-8 space-y-4">
             <button onClick={handleGoogle} type="button" className="flex w-full items-center justify-center gap-3 rounded-full border border-border bg-surface px-5 py-3 text-sm font-semibold transition-colors hover:border-primary">
               <GoogleIcon /> Cadastrar com Google
             </button>
@@ -78,18 +111,18 @@ function SignupPage() {
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required placeholder="voce@email.com" className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition-colors focus:border-primary" />
               </FieldRow>
               <FieldRow label="Senha">
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} placeholder="Mínimo de 6 caracteres" className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition-colors focus:border-primary" />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} placeholder="MÃ­nimo de 6 caracteres" className="h-11 w-full rounded-xl border border-border bg-background px-4 text-sm outline-none transition-colors focus:border-primary" />
               </FieldRow>
               {error && <p className="text-xs text-destructive">{error}</p>}
               {info && <p className="text-xs text-success">{info}</p>}
-              <button disabled={loading} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition-transform hover:scale-[1.02] disabled:opacity-60">
+              <button disabled={loading} className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-(--shadow-glow) transition-transform hover:scale-[1.02] disabled:opacity-60">
                 {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <>Criar conta <ArrowRight className="h-4 w-4" /></>}
               </button>
             </form>
+            <p className="text-center text-xs text-muted-foreground">
+              JÃ¡ tem conta? <Link to="/login" className="font-semibold text-primary hover:underline">Entrar</Link>
+            </p>
           </div>
-          <p className="mt-6 text-center text-xs text-muted-foreground">
-            Já tem conta? <Link to="/login" className="font-semibold text-primary hover:underline">Entrar</Link>
-          </p>
         </div>
       </div>
     </div>
